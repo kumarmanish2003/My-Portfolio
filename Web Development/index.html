@@ -1,125 +1,209 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Web development page by manish</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manish Kumar | Portfolio</title>
   <style>
-    /* Reset default styles */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      font-family: Algerian ,Arial, sans-serif;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f9fbfd;
+      color: #333;
+      line-height: 1.6;
     }
 
-    /* Header styles */
     header {
-      background-color: #0c072e;
-      color: #6c6c7f;
-      padding: 20px;
-      text-align: center;
-    }
-
-    h1 {
-      font-size: 30px;
-      margin-bottom: 10px;
-    }
-
-    /* Navigation styles */
-    nav {
-      background-color: #9907d3;
-      padding: 10px;
-    }
-
-    nav ul {
-      list-style-type: none;
-      margin: 0;
-      padding: 0;
-    }
-
-    nav ul li {
-      display: inline-block;
-      margin-right: 10px;
-    }
-
-    nav ul li a {
-      color: #43034f;
-      text-decoration: none;
-      padding: 5px;
-    }
-
-    /* Main content styles */
-    .container {
-      max-width: 800px;
-      margin: 20px auto;
-      padding: 20px;
-      background-color: #fcf8f8;
-
-    }
-
-    h2 {
-      font-size: 20px;
-      margin-bottom: 10px;
-    }
-
-    p {
-      margin-bottom: 20px;
-      background-color: #fffbfb;
-    }
-
-    /* Footer styles */
-    footer {
-      background-color: #151414;
+      background: linear-gradient(135deg, #06beb6, #48b1bf);
       color: #fff;
-      padding: 20px;
+      padding: 70px 20px;
       text-align: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     }
+    header h1 { font-size: 3rem; margin-bottom: 10px; }
+    header p { font-size: 1.2rem; opacity: 0.95; }
+
+    nav {
+      background: #333;
+      padding: 12px 0;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    nav a {
+      color: #fff;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    nav a:hover { color: #f1c40f; }
+
+    .container { max-width: 1100px; margin: 30px auto; padding: 20px; }
+    section { margin-bottom: 50px; }
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 15px;
+      color: #2c3e50;
+      border-left: 6px solid #f1c40f;
+      padding-left: 12px;
+    }
+    h3 {
+      font-size: 1.4rem;
+      margin: 20px 0 10px;
+      color: #16a085;
+    }
+    p, li { font-size: 1rem; margin-bottom: 10px; }
+    ul { margin-left: 20px; list-style: square; }
+
+    .card {
+      background: #fff;
+      padding: 20px 25px;
+      margin-bottom: 20px;
+      border-radius: 12px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 14px rgba(0,0,0,0.15);
+    }
+
+    footer {
+      background: linear-gradient(135deg, #48b1bf, #06beb6);
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      margin-top: 30px;
+    }
+    footer a { color: #f1c40f; text-decoration: none; font-weight: 500; }
   </style>
 </head>
 <body>
+
   <header>
-    <h1>My Portfolio</h1>
+    <h1>Manish Kumar</h1>
+    <p>B.Tech Civil Engineering @ IIT Kanpur | Aspiring Software Engineer & ML Enthusiast</p>
   </header>
 
   <nav>
-    <ul>
-      <li><a href="#about">About</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#achievements">Achievements</a>
+    <a href="#coursework">Coursework</a>
+    <a href="#contact">Contact</a>
   </nav>
 
   <div class="container">
+
+    <!-- About -->
     <section id="about">
       <h2>About Me</h2>
-      <p>My name is Manish Kumar <br>
-        I am from sonebhadra uttar pradesh <br>
-        I am pursuing B.Tech with Civil Engineering from IIT Kanpur <br>
-        My hobbies are mainly swimming, book reading, watching movies and some sports playing like cricket, badminton etc. <br>
-        I have more and more enthu to learn good skills and in all of that more interst to learn programing/ coding 
-
-
-      </p>
+      <div class="card">
+        <p>
+          I am Manish Kumar, a B.Tech Civil Engineering student at IIT Kanpur and the 
+          first IITian from my village, Uttar Pradesh. Over time, I’ve transitioned 
+          from core engineering to technology, solving <b>700+ DSA problems</b> and achieving 
+          <b>Codeforces Specialist (1400+)</b>. My passion lies in software development, web technologies, 
+          and applying machine learning to solve real-world problems.
+        </p>
+      </div>
     </section>
 
+    <!-- Skills -->
+    <section id="skills">
+      <h2>Skills</h2>
+      <div class="card">
+        <ul>
+          <li><b>Languages:</b> C, C++, Python, JavaScript</li>
+          <li><b>Web:</b> HTML, CSS, JavaScript (Frontend basics), MongoDB (basic)</li>
+          <li><b>Machine Learning:</b> NumPy, Pandas, Scikit-learn, Matplotlib, R</li>
+          <li><b>Tools:</b> Git, VS Code, QGIS, IITPAVE</li>
+          <li><b>Problem Solving:</b> Data Structures & Algorithms, Competitive Programming</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Projects -->
     <section id="projects">
-      <h2>About Project...
-      </h2>Project is  Web development <br>
-      To explore the web development, I choosen this project.
-      <p></p>
+      <h2>Projects</h2>
+
+      <h3>Software & Robotics</h3>
+      <div class="card">
+        <ul>
+          <li><b>Autonomous Tracking Bot:</b> Designed an image-processing-based robot for target tracking (TA212 Project, IITK).</li>
+          <li><b>Battle Bot (15kg):</b> Built a combat-ready robot from scratch as part of Robotics Club @ IITK.</li>
+          <li><b>SoCE Website:</b> Led design & maintenance of the Society of Civil Engineers website, enabling seamless event management (2000+ attendees).</li>
+          <li><b>Portfolio & Web Apps:</b> Developed interactive websites like a Drum Kit and personal portfolio.</li>
+        </ul>
+      </div>
+
+      <h3>Machine Learning & Data Science</h3>
+      <div class="card">
+        <ul>
+          <li><b>Introduction to Machine Learning (CS771):</b> Implemented core ML algorithms (SVMs, Decision Trees, Neural Networks) and analyzed model performance on real datasets.</li>
+          <li><b>Bayesian Model & Data Analysis:</b> Worked under faculty guidance on Bayesian inference, applying probabilistic models to real-world datasets.</li>
+          <li><b>Statistical Modeling:</b> Applied Ordered Logit/Probit and Multinomial Logit models in R for transport data analysis.</li>
+          <li><b>Neural Networks:</b> Implemented Feedforward & Backpropagation from scratch for classification tasks (EE708 Assignment).</li>
+          <li><b>Decision Trees & Ensembles:</b> Built CART-based models, bagging, and boosting classifiers on benchmark datasets.</li>
+          <li><b>TextTree:</b> Experimented with a custom decision-tree approach for word classification.</li>
+          <li><b>Time-Series Analysis:</b> Conducted temperature anomaly comparison (New Delhi vs Global) using Python & visualization.</li>
+        </ul>
+      </div>
     </section>
 
-    <section id="contact">
-      <h2>Contacts..<br>
-        My personal details..
-    </h2>My contact number is : +918423711306 <br>
-    My whatsApp number is :8423711306 <br>
-    My IITK mail is : kumarm22@iitk.ac.in <br>
-    My another mail : manish10524@gmail.com <br>
-      <p></p>
+    <!-- Achievements -->
+    <section id="achievements">
+      <h2>Achievements</h2>
+      <div class="card">
+        <ul>
+          <li>Solved 700+ DSA problems across LeetCode, GFG, Codeforces, CodeChef, etc.</li>
+          <li>Codeforces Rating: <b>1400+ (Specialist)</b>.</li>
+          <li>Secretary, Web Development – Society of Civil Engineers @ IITK (2023–24).</li>
+          <li>Organized Sankalan ’23 with 2000+ attendees (talks, workshops, tech exhibition).</li>
+          <li>Winner – Aranyam Competition, IIT Kanpur.</li>
+          <li>2nd Position (Silver) – Hindi Sahitya Sabha, Galaxy ’23.</li>
+          <li>Completed 1-year NCC program.</li>
+          <li>First IITian from my village.</li>
+        </ul>
+      </div>
     </section>
+
+    <!-- Coursework -->
+    <section id="coursework">
+      <h2>Relevant Coursework</h2>
+      <div class="card">
+        <ul>
+          <li>CS771 – Introduction to Machine Learning</li>
+          <li>EE708 – Fundamentals of Data Science & Machine Intelligence</li>
+          <li>Bayesian Model & Data Analysis</li>
+          <li>Probability & Statistics</li>
+          <li>Computational Methods</li>
+          <li>Principle of Geoinformatics</li>
+          <li>Transportation Engineering (Statistical Modeling focus)</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+      <h2>Contact</h2>
+      <div class="card">
+        <p>Email: <a href="mailto:kumarm22@iitk.ac.in">kumarm22@iitk.ac.in</a></p>
+        <p>Alternate: <a href="mailto:manish10524@gmail.com">manish10524@gmail.com</a></p>
+        <p>LinkedIn: <a href="https://linkedin.com/in/manish10524" target="_blank">linkedin.com/in/manish10524</a></p>
+        <p>GitHub: <a href="https://github.com/manish10524" target="_blank">github.com/manish10524</a></p>
+      </div>
+    </section>
+
   </div>
 
-  <footer
+  <footer>
+    <p>© 2025 Manish Kumar | Built with ❤️ and Bright Ideas</p>
+  </footer>
+
+</body>
+</html>
