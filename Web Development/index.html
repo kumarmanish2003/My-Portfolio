@@ -1,209 +1,530 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Manish Kumar | Portfolio</title>
+  <meta name="description" content="Manish Kumar — B.Tech Civil @ IIT Kanpur | Aspiring Software Engineer & ML Enthusiast. Projects in Web, Robotics, and Machine Learning." />
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    /* ============================
+       Base + Theme (Bright + Clean)
+       ============================ */
+    :root {
+      --bg: #f9fbfd;
+      --text: #222;
+      --muted: #586170;
+      --card: #ffffff;
+      --primary: #06beb6;   /* teal */
+      --primary-2: #48b1bf; /* teal-blue */
+      --accent: #f1c40f;    /* golden */
+      --heading: #2c3e50;
+      --shadow: 0 6px 16px rgba(0,0,0,0.12);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0f1520;
+        --text: #e6e9ef;
+        --muted: #b3b9c6;
+        --card: #151b29;
+        --primary: #31d0c6;
+        --primary-2: #5fd0dc;
+        --accent: #ffd85a;
+        --heading: #eaf2ff;
+        --shadow: 0 8px 22px rgba(0,0,0,0.5);
+      }
+    }
 
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
-      font-family: "Segoe UI", Arial, sans-serif;
-      background: #f9fbfd;
-      color: #333;
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--text);
+      background: var(--bg);
       line-height: 1.6;
     }
 
-    header {
-      background: linear-gradient(135deg, #06beb6, #48b1bf);
-      color: #fff;
-      padding: 70px 20px;
-      text-align: center;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    }
-    header h1 { font-size: 3rem; margin-bottom: 10px; }
-    header p { font-size: 1.2rem; opacity: 0.95; }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
 
-    nav {
-      background: #333;
-      padding: 12px 0;
+    /* ============================
+       Header / Hero
+       ============================ */
+    header.hero {
+      position: relative;
+      padding: 84px 20px 64px;
       text-align: center;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-    nav a {
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
       color: #fff;
-      margin: 0 15px;
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s;
+      overflow: hidden;
     }
-    nav a:hover { color: #f1c40f; }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: -20% -10% auto -10%;
+      height: 120%;
+      background: radial-gradient( circle at 50% 0%, rgba(255,255,255,0.25), transparent 55% );
+      pointer-events: none;
+      filter: blur(20px);
+    }
+    .hero h1 { font-size: clamp(2rem, 4vw, 3rem); margin: 8px 0; letter-spacing: 0.5px; }
+    .hero p { opacity: 0.95; font-size: clamp(1rem, 2.2vw, 1.2rem); }
 
-    .container { max-width: 1100px; margin: 30px auto; padding: 20px; }
-    section { margin-bottom: 50px; }
-    h2 {
-      font-size: 2rem;
-      margin-bottom: 15px;
-      color: #2c3e50;
-      border-left: 6px solid #f1c40f;
-      padding-left: 12px;
+    .hero-actions { margin-top: 22px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      padding: 12px 20px;
+      border-radius: 999px;
+      border: none;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform .2s ease, box-shadow .25s ease, background .25s ease;
+      box-shadow: var(--shadow);
+      display: inline-flex; align-items: center; gap: 8px;
     }
-    h3 {
-      font-size: 1.4rem;
-      margin: 20px 0 10px;
-      color: #16a085;
+    .btn-primary { background: linear-gradient(135deg, #00c6ff, #0072ff); color: #fff; }
+    .btn-primary:hover { transform: translateY(-2px); }
+    .btn-ghost { background: rgba(255,255,255,0.18); color: #fff; backdrop-filter: blur(6px); }
+    .btn-ghost:hover { background: rgba(255,255,255,0.28); transform: translateY(-2px); }
+
+    /* Dark mode toggle */
+    .topbar { position: sticky; top: 0; z-index: 40; background: #222; color: #fff; }
+    .topbar-inner { max-width: 1100px; margin: 0 auto; padding: 10px 16px; display: flex; gap: 12px; align-items: center; justify-content: space-between; }
+    .nav { display: flex; gap: 16px; flex-wrap: wrap; }
+    .nav a { color: #fff; opacity: 0.95; font-weight: 600; }
+    .nav a:hover { color: var(--accent); }
+
+    .toggle {
+      display: inline-flex; align-items: center; gap: 8px; border-radius: 999px; padding: 8px 14px; cursor: pointer; background: #2c2c2c;
     }
-    p, li { font-size: 1rem; margin-bottom: 10px; }
-    ul { margin-left: 20px; list-style: square; }
+
+    /* ============================
+       Layout helpers
+       ============================ */
+    .container { max-width: 1100px; margin: 0 auto; padding: 28px 16px; }
+    section { margin: 38px 0 54px; }
+    h2.section-title {
+      font-size: clamp(1.6rem, 2.4vw, 2rem);
+      color: var(--heading);
+      border-left: 6px solid var(--accent);
+      padding-left: 12px; margin-bottom: 16px;
+    }
+
+    /* Cards & grid */
+    .grid { display: grid; gap: 16px; }
+    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    @media (max-width: 900px) { .grid-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 640px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
 
     .card {
-      background: #fff;
-      padding: 20px 25px;
-      margin-bottom: 20px;
-      border-radius: 12px;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-      transition: transform 0.25s, box-shadow 0.25s;
+      background: var(--card);
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      padding: 18px 18px;
+      transition: transform .2s ease, box-shadow .25s ease;
     }
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 5px 14px rgba(0,0,0,0.15);
-    }
+    .card:hover { transform: translateY(-4px); }
 
-    footer {
-      background: linear-gradient(135deg, #48b1bf, #06beb6);
-      color: #fff;
-      text-align: center;
-      padding: 20px;
-      margin-top: 30px;
-    }
-    footer a { color: #f1c40f; text-decoration: none; font-weight: 500; }
+    .muted { color: var(--muted); }
+    .tag { display: inline-block; padding: 6px 10px; border-radius: 999px; background: rgba(0,0,0,0.06); margin: 4px 6px 0 0; font-size: 0.85rem; }
+
+    /* ============================
+       About
+       ============================ */
+    .about p { margin: 0; }
+
+    /* ============================
+       Skills
+       ============================ */
+    .skills .card ul { margin: 0; padding-left: 16px; }
+    .skills .card li { margin: 6px 0; }
+
+    /* ============================
+       Projects + Filter
+       ============================ */
+    .filters { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; }
+    .filter-btn { padding: 8px 14px; border-radius: 999px; border: 1px solid rgba(0,0,0,0.1); background: var(--card); cursor: pointer; }
+    .filter-btn.active { background: linear-gradient(135deg, var(--primary), var(--primary-2)); color: #fff; border-color: transparent; }
+
+    .project { display: flex; flex-direction: column; gap: 10px; }
+    .project h3 { margin: 0; font-size: 1.05rem; }
+    .project p { margin: 0; }
+
+    /* ============================
+       Achievements & Coursework
+       ============================ */
+    .list li { margin: 8px 0; }
+
+    /* ============================
+       Contact
+       ============================ */
+    .contact .socials { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 8px; }
+    .icon-btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 14px; border-radius: 999px; background: var(--card); box-shadow: var(--shadow); }
+
+    /* Back to top */
+    #toTop { position: fixed; right: 16px; bottom: 16px; padding: 10px 14px; border-radius: 999px; border: none; background: linear-gradient(135deg, var(--primary), var(--primary-2)); color: #fff; cursor: pointer; box-shadow: var(--shadow); display: none; }
   </style>
 </head>
 <body>
-
-  <header>
+  <!-- HERO -->
+  <header class="hero" role="banner">
     <h1>Manish Kumar</h1>
-    <p>B.Tech Civil Engineering @ IIT Kanpur | Aspiring Software Engineer & ML Enthusiast</p>
+    <p>B.Tech Civil Engineering @ IIT Kanpur • Aspiring Software Engineer & ML Enthusiast</p>
+    <div class="hero-actions" aria-label="primary actions">
+      <a class="btn btn-primary" href="#projects" aria-label="View projects">
+        <span>View Projects</span>
+      </a>
+      <a class="btn btn-ghost" href="#contact" aria-label="Contact Manish">
+        <span>Contact</span>
+      </a>
+      <a class="btn btn-ghost" href="resume.pdf" download aria-label="Download resume">
+        <span>Download Résumé</span>
+      </a>
+    </div>
   </header>
 
-  <nav>
-    <a href="#about">About</a>
-    <a href="#skills">Skills</a>
-    <a href="#projects">Projects</a>
-    <a href="#achievements">Achievements</a>
-    <a href="#coursework">Coursework</a>
-    <a href="#contact">Contact</a>
-  </nav>
+  <!-- TOP NAV -->
+  <div class="topbar" role="navigation" aria-label="Main">
+    <div class="topbar-inner">
+      <nav class="nav">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#achievements">Achievements</a>
+        <a href="#coursework">Coursework</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <button id="themeToggle" class="toggle" aria-pressed="false" aria-label="Toggle dark mode">🌙 Dark</button>
+    </div>
+  </div>
 
-  <div class="container">
-
-    <!-- About -->
-    <section id="about">
-      <h2>About Me</h2>
+  <main class="container">
+    <!-- ABOUT -->
+    <section id="about" class="about" aria-labelledby="about-title">
+      <h2 id="about-title" class="section-title">About Me</h2>
       <div class="card">
         <p>
-          I am Manish Kumar, a B.Tech Civil Engineering student at IIT Kanpur and the 
-          first IITian from my village, Uttar Pradesh. Over time, I’ve transitioned 
-          from core engineering to technology, solving <b>700+ DSA problems</b> and achieving 
-          <b>Codeforces Specialist (1400+)</b>. My passion lies in software development, web technologies, 
-          and applying machine learning to solve real-world problems.
+          I am Manish Kumar, a B.Tech Civil Engineering student at IIT Kanpur and the first IITian from my village in Sonbhadra, Uttar Pradesh. Over time, I’ve transitioned from core engineering to technology, solving <strong>700+ DSA problems</strong> and achieving <strong>Codeforces Specialist (1400+)</strong>. I enjoy building robust software and applying Machine Learning to real-world problems.
         </p>
       </div>
     </section>
 
-    <!-- Skills -->
-    <section id="skills">
-      <h2>Skills</h2>
-      <div class="card">
-        <ul>
-          <li><b>Languages:</b> C, C++, Python, JavaScript</li>
-          <li><b>Web:</b> HTML, CSS, JavaScript (Frontend basics), MongoDB (basic)</li>
-          <li><b>Machine Learning:</b> NumPy, Pandas, Scikit-learn, Matplotlib, R</li>
-          <li><b>Tools:</b> Git, VS Code, QGIS, IITPAVE</li>
-          <li><b>Problem Solving:</b> Data Structures & Algorithms, Competitive Programming</li>
-        </ul>
+    <!-- SKILLS -->
+    <section id="skills" class="skills" aria-labelledby="skills-title">
+      <h2 id="skills-title" class="section-title">Skills</h2>
+      <div class="grid grid-3">
+        <div class="card">
+          <h3>Languages</h3>
+          <ul>
+            <li>C, C++, Python, JavaScript</li>
+          </ul>
+          <div class="muted">Strong problem solving in DSA & algorithms.</div>
+        </div>
+        <div class="card">
+          <h3>Web</h3>
+          <ul>
+            <li>HTML, CSS, JavaScript (Frontend basics)</li>
+            <li>MongoDB (basic)</li>
+          </ul>
+          <div class="muted">Built portfolio & interactive mini-apps.</div>
+        </div>
+        <div class="card">
+          <h3>Machine Learning / Data</h3>
+          <ul>
+            <li>NumPy, Pandas, scikit-learn, Matplotlib, R</li>
+          </ul>
+          <div class="muted">Modeling, evaluation, visualization, and experimentation.</div>
+        </div>
+        <div class="card">
+          <h3>Tools</h3>
+          <ul>
+            <li>Git, VS Code, QGIS, IITPAVE</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Competitive Programming</h3>
+          <ul>
+            <li>Codeforces Specialist (1400+), 700+ DSA problems solved</li>
+          </ul>
+        </div>
       </div>
     </section>
 
-    <!-- Projects -->
-    <section id="projects">
-      <h2>Projects</h2>
+    <!-- PROJECTS -->
+    <section id="projects" aria-labelledby="projects-title">
+      <h2 id="projects-title" class="section-title">Projects</h2>
 
-      <h3>Software & Robotics</h3>
-      <div class="card">
-        <ul>
-          <li><b>Autonomous Tracking Bot:</b> Designed an image-processing-based robot for target tracking (TA212 Project, IITK).</li>
-          <li><b>Battle Bot (15kg):</b> Built a combat-ready robot from scratch as part of Robotics Club @ IITK.</li>
-          <li><b>SoCE Website:</b> Led design & maintenance of the Society of Civil Engineers website, enabling seamless event management (2000+ attendees).</li>
-          <li><b>Portfolio & Web Apps:</b> Developed interactive websites like a Drum Kit and personal portfolio.</li>
-        </ul>
+      <div class="filters" role="tablist" aria-label="Project filters">
+        <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">All</button>
+        <button class="filter-btn" data-filter="software" role="tab" aria-selected="false">Software & Robotics</button>
+        <button class="filter-btn" data-filter="ml" role="tab" aria-selected="false">ML & Data Science</button>
       </div>
 
-      <h3>Machine Learning & Data Science</h3>
-      <div class="card">
-        <ul>
-          <li><b>Introduction to Machine Learning (CS771):</b> Implemented core ML algorithms (SVMs, Decision Trees, Neural Networks) and analyzed model performance on real datasets.</li>
-          <li><b>Bayesian Model & Data Analysis:</b> Worked under faculty guidance on Bayesian inference, applying probabilistic models to real-world datasets.</li>
-          <li><b>Statistical Modeling:</b> Applied Ordered Logit/Probit and Multinomial Logit models in R for transport data analysis.</li>
-          <li><b>Neural Networks:</b> Implemented Feedforward & Backpropagation from scratch for classification tasks (EE708 Assignment).</li>
-          <li><b>Decision Trees & Ensembles:</b> Built CART-based models, bagging, and boosting classifiers on benchmark datasets.</li>
-          <li><b>TextTree:</b> Experimented with a custom decision-tree approach for word classification.</li>
-          <li><b>Time-Series Analysis:</b> Conducted temperature anomaly comparison (New Delhi vs Global) using Python & visualization.</li>
-        </ul>
+      <div class="grid grid-3" id="projectGrid">
+        <!-- Software & Robotics -->
+        <article class="card project" data-cat="software">
+          <h3>Autonomous Tracking Bot</h3>
+          <p class="muted">Image-processing based robot for real-time target tracking (TA212 Project, IITK).</p>
+          <div>
+            <span class="tag">OpenCV</span>
+            <span class="tag">Robotics</span>
+            <span class="tag">C++</span>
+          </div>
+        </article>
+
+        <article class="card project" data-cat="software">
+          <h3>Battle Bot (15 kg)</h3>
+          <p class="muted">Designed & fabricated a combat-ready robot as part of Robotics Club @ IITK.</p>
+          <div>
+            <span class="tag">Mechanical</span>
+            <span class="tag">Electronics</span>
+            <span class="tag">Team Lead</span>
+          </div>
+        </article>
+
+        <article class="card project" data-cat="software">
+          <h3>SoCE Website (IITK)</h3>
+          <p class="muted">Led design, development & maintenance; powered Sankalan’23 event workflows (2000+ attendees).</p>
+          <div>
+            <span class="tag">HTML/CSS/JS</span>
+            <span class="tag">Leadership</span>
+            <span class="tag">Event Ops</span>
+          </div>
+        </article>
+
+        <article class="card project" data-cat="software">
+          <h3>Portfolio & Mini Web Apps</h3>
+          <p class="muted">Personal portfolio, Drum Kit, and interactive JS apps.</p>
+          <div>
+            <span class="tag">HTML</span>
+            <span class="tag">CSS</span>
+            <span class="tag">JavaScript</span>
+          </div>
+        </article>
+
+        <!-- ML & Data Science -->
+        <article class="card project" data-cat="ml">
+          <h3>CS771 — Introduction to Machine Learning</h3>
+          <p class="muted">Implemented core ML algorithms (SVMs, Decision Trees, NNs), compared models on real datasets.</p>
+          <div>
+            <span class="tag">Python</span>
+            <span class="tag">scikit-learn</span>
+            <span class="tag">Model Eval</span>
+          </div>
+        </article>
+
+        <article class="card project" data-cat="ml">
+          <h3>Bayesian Model & Data Analysis</h3>
+          <p class="muted">Probabilistic modeling & inference under faculty guidance; applied Bayesian methods to real data.</p>
+          <div>
+            <span class="tag">Bayesian</span>
+            <span class="tag">R / Python</span>
+            <span class="tag">Inference</span>
+          </div>
+        </article>
+
+        <article class="card project" data-cat="ml">
+          <h3>EE708 — Data Science & ML</h3>
+          <p class="muted">From-scratch FFNN + backprop; CART trees; bagging & boosting experiments.</p>
+          <div>
+            <span class="tag">Python</span>
+            <span class="tag">NumPy</span>
+            <span class="tag">ML</span>
+          </div>
+        </article>
+
+        <article class="card project" data-cat="ml">
+          <h3>Statistical Modeling (Transport)</h3>
+          <p class="muted">Ordered Logit/Probit & Multinomial Logit models in R for transportation data analysis.</p>
+          <div>
+            <span class="tag">R</span>
+            <span class="tag">MNL</span>
+            <span class="tag">OL/Probit</span>
+          </div>
+        </article>
+
+        <article class="card project" data-cat="ml">
+          <h3>TextTree — Word Classification</h3>
+          <p class="muted">Custom decision-tree inspired approach for token/word classification.</p>
+          <div>
+            <span class="tag">Python</span>
+            <span class="tag">Trees</span>
+            <span class="tag">NLP</span>
+          </div>
+        </article>
+
+        <article class="card project" data-cat="ml">
+          <h3>Time-Series Temperature Anomalies</h3>
+          <p class="muted">Compared New Delhi vs Global anomalies; data wrangling & visualization.</p>
+          <div>
+            <span class="tag">Pandas</span>
+            <span class="tag">Matplotlib</span>
+            <span class="tag">Time Series</span>
+          </div>
+        </article>
       </div>
     </section>
 
-    <!-- Achievements -->
-    <section id="achievements">
-      <h2>Achievements</h2>
+    <!-- ACHIEVEMENTS -->
+    <section id="achievements" aria-labelledby="achievements-title">
+      <h2 id="achievements-title" class="section-title">Achievements</h2>
       <div class="card">
-        <ul>
-          <li>Solved 700+ DSA problems across LeetCode, GFG, Codeforces, CodeChef, etc.</li>
-          <li>Codeforces Rating: <b>1400+ (Specialist)</b>.</li>
-          <li>Secretary, Web Development – Society of Civil Engineers @ IITK (2023–24).</li>
-          <li>Organized Sankalan ’23 with 2000+ attendees (talks, workshops, tech exhibition).</li>
-          <li>Winner – Aranyam Competition, IIT Kanpur.</li>
-          <li>2nd Position (Silver) – Hindi Sahitya Sabha, Galaxy ’23.</li>
+        <ul class="list">
+          <li>Solved <strong>700+ DSA</strong> problems across LeetCode, GFG, Codeforces, CodeChef, etc.</li>
+          <li><strong>Codeforces Specialist (1400+)</strong>.</li>
+          <li>Secretary, Web — Society of Civil Engineers @ IITK (2023–24).</li>
+          <li>Organized Sankalan ’23 with <strong>2000+ attendees</strong> (talks, workshops, tech expo).</li>
+          <li>Winner — Aranyam Competition, IIT Kanpur.</li>
+          <li>2nd Position (Silver) — Hindi Sahitya Sabha, Galaxy ’23.</li>
           <li>Completed 1-year NCC program.</li>
-          <li>First IITian from my village.</li>
+          <li>First IITian from my village (Sonbhadra, UP).</li>
         </ul>
       </div>
     </section>
 
-    <!-- Coursework -->
-    <section id="coursework">
-      <h2>Relevant Coursework</h2>
-      <div class="card">
-        <ul>
-          <li>CS771 – Introduction to Machine Learning</li>
-          <li>EE708 – Fundamentals of Data Science & Machine Intelligence</li>
-          <li>Bayesian Model & Data Analysis</li>
-          <li>Probability & Statistics</li>
-          <li>Computational Methods</li>
-          <li>Principle of Geoinformatics</li>
-          <li>Transportation Engineering (Statistical Modeling focus)</li>
-        </ul>
+    <!-- COURSEWORK -->
+    <section id="coursework" aria-labelledby="coursework-title">
+      <h2 id="coursework-title" class="section-title">Relevant Coursework</h2>
+      <div class="grid grid-3">
+        <div class="card">
+          <h3>ML & Data</h3>
+          <ul class="list">
+            <li>CS771 — Intro to Machine Learning</li>
+            <li>EE708 — Fundamentals of DS & ML</li>
+            <li>Bayesian Model & Data Analysis</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Math & Foundations</h3>
+          <ul class="list">
+            <li>Probability & Statistics</li>
+            <li>Computational Methods</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Domain</h3>
+          <ul class="list">
+            <li>Principle of Geoinformatics</li>
+            <li>Transportation Engineering</li>
+          </ul>
+        </div>
       </div>
     </section>
 
-    <!-- Contact -->
-    <section id="contact">
-      <h2>Contact</h2>
+    <!-- CONTACT -->
+    <section id="contact" class="contact" aria-labelledby="contact-title">
+      <h2 id="contact-title" class="section-title">Contact</h2>
       <div class="card">
-        <p>Email: <a href="mailto:kumarm22@iitk.ac.in">kumarm22@iitk.ac.in</a></p>
-        <p>Alternate: <a href="mailto:manish10524@gmail.com">manish10524@gmail.com</a></p>
-        <p>LinkedIn: <a href="https://linkedin.com/in/manish10524" target="_blank">linkedin.com/in/manish10524</a></p>
-        <p>GitHub: <a href="https://github.com/manish10524" target="_blank">github.com/manish10524</a></p>
+        <p>Email: <a href="mailto:kumarm22@iitk.ac.in">kumarm22@iitk.ac.in</a> · Alternate: <a href="mailto:manish10524@gmail.com">manish10524@gmail.com</a></p>
+        <div class="socials" aria-label="social links">
+          <a class="icon-btn" href="https://linkedin.com/in/manish10524" target="_blank" rel="noreferrer noopener" aria-label="LinkedIn">
+            <span>💼</span> LinkedIn
+          </a>
+          <a class="icon-btn" href="https://github.com/manish10524" target="_blank" rel="noreferrer noopener" aria-label="GitHub">
+            <span>🐙</span> GitHub
+          </a>
+          <button class="icon-btn" id="copyMail" aria-label="Copy email">
+            <span>📋</span> Copy Email
+          </button>
+        </div>
       </div>
     </section>
+  </main>
 
-  </div>
-
-  <footer>
-    <p>© 2025 Manish Kumar | Built with ❤️ and Bright Ideas</p>
+  <footer class="container" style="padding-top:0">
+    <div class="card" style="text-align:center">
+      © 2025 Manish Kumar · Built with ❤️, C++ & Python · <a href="#about" aria-label="Back to top link">Back to top</a>
+    </div>
   </footer>
 
+  <button id="toTop" title="Back to top" aria-label="Back to top">↑</button>
+
+  <script>
+    // Persisted theme toggle (light/dark)
+    const root = document.documentElement;
+    const toggle = document.getElementById('themeToggle');
+    const stored = localStorage.getItem('theme');
+    if (stored === 'dark') document.documentElement.classList.add('dark');
+
+    function applyMode(mode) {
+      if (mode === 'dark') {
+        document.documentElement.style.colorScheme = 'dark';
+        toggle.textContent = '☀️ Light';
+        toggle.setAttribute('aria-pressed', 'true');
+      } else {
+        document.documentElement.style.colorScheme = 'light';
+        toggle.textContent = '🌙 Dark';
+        toggle.setAttribute('aria-pressed', 'false');
+      }
+    }
+
+    function currentMode() {
+      return getComputedStyle(root).getPropertyValue('--bg').trim() === '#0f1520' ? 'dark' : 'light';
+    }
+
+    applyMode(stored || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+
+    toggle.addEventListener('click', () => {
+      const isDark = currentMode() === 'dark';
+      const next = isDark ? 'light' : 'dark';
+      if (next === 'dark') {
+        // force dark by swapping CSS variables quickly
+        root.style.setProperty('--bg', '#0f1520');
+        root.style.setProperty('--text', '#e6e9ef');
+        root.style.setProperty('--muted', '#b3b9c6');
+        root.style.setProperty('--card', '#151b29');
+        root.style.setProperty('--primary', '#31d0c6');
+        root.style.setProperty('--primary-2', '#5fd0dc');
+        root.style.setProperty('--accent', '#ffd85a');
+        root.style.setProperty('--heading', '#eaf2ff');
+        root.style.setProperty('--shadow', '0 8px 22px rgba(0,0,0,0.5)');
+      } else {
+        // reset to light
+        root.style.setProperty('--bg', '#f9fbfd');
+        root.style.setProperty('--text', '#222');
+        root.style.setProperty('--muted', '#586170');
+        root.style.setProperty('--card', '#ffffff');
+        root.style.setProperty('--primary', '#06beb6');
+        root.style.setProperty('--primary-2', '#48b1bf');
+        root.style.setProperty('--accent', '#f1c40f');
+        root.style.setProperty('--heading', '#2c3e50');
+        root.style.setProperty('--shadow', '0 6px 16px rgba(0,0,0,0.12)');
+      }
+      applyMode(next);
+      localStorage.setItem('theme', next);
+    });
+
+    // Project filter
+    const filters = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('#projectGrid .project');
+    filters.forEach(btn => btn.addEventListener('click', () => {
+      filters.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const cat = btn.dataset.filter;
+      cards.forEach(c => {
+        c.style.display = (cat === 'all' || c.dataset.cat === cat) ? 'flex' : 'none';
+      });
+    }));
+
+    // Back to top visibility
+    const toTop = document.getElementById('toTop');
+    const onScroll = () => {
+      if (window.scrollY > 400) toTop.style.display = 'block';
+      else toTop.style.display = 'none';
+    };
+    window.addEventListener('scroll', onScroll);
+    toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    // Copy email
+    document.getElementById('copyMail').addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText('kumarm22@iitk.ac.in');
+        const btn = document.getElementById('copyMail');
+        const prev = btn.innerHTML;
+        btn.innerHTML = '✅ Copied!';
+        setTimeout(() => btn.innerHTML = prev, 1200);
+      } catch (e) { alert('Copy failed, email: kumarm22@iitk.ac.in'); }
+    });
+  </script>
 </body>
 </html>
